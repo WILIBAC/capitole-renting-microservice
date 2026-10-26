@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: capitole-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  renting-api:
+    build:
+      context: .
+      dockerfile: src/GtMotive.Estimate.Microservice.Host/Dockerfile
+      args:
+        PersonalAccessToken: "dummy_token"
+    container_name: capitole-api
+    ports:
+      - "8080:80"
+    depends_on:
+      - mongodb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDb=mongodb://mongodb:27017/RentingDb
+
+volumes:
+  mongo_data:
