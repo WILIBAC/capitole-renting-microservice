@@ -14,6 +14,7 @@ namespace GtMotive.Estimate.Microservice.FunctionalTests
         /// <summary>
         /// Tests that a customer cannot rent more than one vehicle at a time.
         /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         [Fact]
         public async Task ExecuteAsyncShouldThrowExceptionWhenCustomerHasActiveRental()
         {
